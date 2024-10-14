@@ -1,0 +1,5 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    padding-top: 50px; /** Needed for the NavBar to Push Items down **/
+}

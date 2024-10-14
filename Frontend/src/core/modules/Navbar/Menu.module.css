@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  display: grid;
+  background-color: gray;
+  font-family: system-ui, sans-serif;
+}
+
+.menu {
+  display: flex;
+  z-index: 10;
+  width: 100%;
+  background-image: linear-gradient(
+    rgb(48, 48, 48) 13%,
+    rgb(30, 30, 30) 40%,
+    #0c0d11 86%
+  );
+  color: rgba(255, 255, 255, 0.6);
+  text-shadow: 0 -2px 0 black;
+  cursor: pointer;
+  border-bottom: 1px solid rgb(255, 215, 0, 0.7);
+  box-shadow: 1px 2px 4px rgb(20, 20, 20), 0 4px 12px rgb(10, 10, 10);
+}
+
+.navItem {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 0.8999rem;
+  line-height: 1rem;
+  align-items: center;
+  min-width: 80px;
+  justify-content: space-between;
+  transition: all 80ms ease;
+}
+
+
+
+.navItem.active {
+  color: rgb(255, 215, 0, 0.7);
+  text-shadow: 0 0 3px rgb(255, 215, 0, 0.7);
+}
+
+.navItem:not(.active):hover {
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.navItem:hover > .icon .subicon {
+  height: 32px;
+  width: 32px;
+  border-radius: 32px;
+  top: -16px;
+  right: -16px;
+  border-color: white;
+}
+
+.navItem:not(:first-of-type) {
+  border-left: 1px solid rgb(60, 60, 60);
+}
+
+.navItem:not(:last-of-type) {
+  border-right: 0.1rem solid black;
+}
+
+.tab {
+  color: inherit;
+  text-decoration: none;
+  padding: 1ch;
+}
+
+.icon {
+  padding: 1ch;
+  position: relative;
+}
+
+.icon > svg {
+  max-width: 16px;
+}

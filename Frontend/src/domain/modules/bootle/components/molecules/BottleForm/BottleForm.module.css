@@ -1,0 +1,94 @@
+.bottleFormPage {
+    max-width: 900px; 
+    margin: 40px auto;
+    top:5rem;
+    bottom: 5rem;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px rgba(212, 175, 55, 1);
+    background: linear-gradient(145deg, rgba(120, 120, 120, 1) 35%, rgba(43, 43, 43, 1) 100%);
+}
+
+.title {
+    margin-left: 10px;
+    color: #d4af37;
+    font: 300 1.55rem/1.4 "Josefin Sans";
+    text-transform: uppercase;
+    text-decoration: none;
+    padding-bottom: 2rem;
+    flex: 1; 
+}
+
+.addBottleForm {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+/* Flex container for form fields and image drop */
+.formContent {
+    display: flex;
+    justify-content: space-between; 
+    gap: 20px;
+}
+
+.formFields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 2; 
+}
+
+.formField {
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.imageDrop {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    max-width: 250px; 
+}
+
+.submitButton {
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: #3e8e41;
+    width: min-content;
+    color: white !important;
+}
+
+.submitButton:hover {
+    background-color: #06af41 !important;
+    color: white;
+    width: min-content;
+    border-radius: 5px;
+}
+
+.css-sghohy-MuiButtonBase-root-MuiButton-root {
+    background-color: #3e8e41 !important;
+}
+
+.css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
+    background-color: #06af41 !important;
+}
+
+@media (max-width: 768px) {
+    .formContent {
+        flex-direction: column;
+    }
+
+    .imageDrop {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .submitButton {
+        margin-left: 0;
+        position: relative;
+        bottom: 0;
+        margin-top: 20px;
+    }
+}

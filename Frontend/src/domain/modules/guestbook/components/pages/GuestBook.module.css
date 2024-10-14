@@ -1,0 +1,338 @@
+.ul {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid #d4af37;
+    outline: none;
+    margin-top: 10ch;
+    align-content: flex-start;
+  }
+  
+.li {
+    height: 40vh;
+    flex-grow: 1;
+}
+
+.img {
+    max-height: 100%;
+    min-width: 100%;
+    object-fit: cover;
+    vertical-align: bottom;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+body {
+    display: inline-block !important;
+    place-content: center;
+    grid-gap: 2rem;
+}
+
+.div-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%;
+    max-width: 3000px; 
+    margin: 2rem auto; 
+    padding: 2rem;
+    padding-top: 10ch;
+    box-sizing: border-box;
+}
+
+.title {
+    margin: 0; 
+    color: #d4af37;
+    font: 300 1.55rem/1.4 "Josefin Sans";
+    text-transform: uppercase;
+    word-spacing: 0.3em;
+    text-decoration: none;
+    flex: 1; 
+}
+
+.link { 
+    width: 8rem;
+    height: 8rem;
+    display: inline-block;
+    font: 300 1.55rem/1.4 "Josefin Sans";
+    text-transform: uppercase;
+    letter-spacing: 0.1175em;
+    word-spacing: 0.3em;
+    text-decoration: none;
+    flex-shrink: 0; 
+}
+
+.link__svg {
+    width: 100%;
+    height: auto;
+    transform-box: fill-box;
+    fill: #d4af37;
+    stroke: #d4af37;
+    stroke-width: 0.05em;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.link__arrow {
+    stroke-width: 0.1em;
+}
+
+.link__text {
+    animation: rotateReverse 20s linear infinite;
+    transform-origin: 50% 50%;
+}
+
+.ul {
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid #d4af37;
+    margin: 2rem 0;
+    width: 100%;
+    max-width: 3000px;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .li {
+    position: relative;
+    flex-grow: 1;
+    width: 100%;
+    max-width: 33%; 
+    height: 40vh;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .li::before {
+    content: '';
+    display: block;
+   
+  }
+
+  .img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 100%;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateReverse {
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+.card-img-overlay {
+    top: 0;
+    padding: 1.25rem;
+    border-radius: 0.8rem;
+}
+.card-img-overlay.--card-img-overlay-purple {
+    background-color: rgba(45, 26, 80, 0.7);
+    background-image: url('https://assets.codepen.io/4927073/hero10.jpg');
+    background-size: cover;
+    background-position: 0 0;
+    height: 125px;
+    width: 100%;
+}
+
+.card {
+    position: relative;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #00000020;
+    border-radius: 0.8rem;
+}
+
+.badge-warning2 {
+    background: linear-gradient(135deg, transparent 0%, transparent 8%, rgba(255, 255, 255, 0.03) 30%, rgba(255, 255, 255, 0.03) 60%, rgba(255, 255, 255, 0) 68%);
+    background-color: rgba(230, 230, 230, 0.45);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1666666667em;
+}
+
+.card.bg-primary.text-white.text-center.p-4.border-0 {
+    background-image: url('https://i.pinimg.com/originals/d7/16/3f/d7163f9cdfe701469b1d3f840b020d0b.jpg');
+    background-size: cover;
+    background-position: 50% 0;
+}
+
+.h3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    color: #fff;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 1.2rem;
+    font-family: "Manrope", sans-serif;
+    font-weight: 800;
+    z-index: 2;
+  }
+
+  .description {
+    font-size: 0.8rem;
+    font-weight: 200;
+    width: 25rem;
+    
+
+  }
+
+  .text-light {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0.5rem;
+    font-size: 1rem;
+    color: #fff;
+    z-index: 2;
+  }
+
+@media (min-width: 420px) {
+    .card-columns {
+        column-count: 2;
+        column-gap: 0.5rem;
+    }
+}
+@media (min-width: 576px) {
+    .card-columns {
+        column-count: 3;
+        column-gap: 0.5rem;
+    }
+}
+
+
+@media (max-width: 1024px) {
+    
+    .title {
+        font-size: 1.2rem;
+        text-align: center;
+        word-spacing: 0.15em;
+    }
+
+    .link {
+        width: 6rem; 
+        height: 6rem;
+    }
+
+    .link__text {
+        font-size: 1rem;
+    }
+
+    .li {
+        max-width: 50%; 
+        position: relative;
+    }
+
+    .h3 {
+        position: absolute;
+        bottom: 2.5rem; 
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.5); 
+        color: #fff;
+        padding: 0.5rem;
+        box-sizing: border-box;
+        text-align: left;
+        font-size: 1.2rem;
+        font-family: "Manrope", sans-serif;
+        font-weight: 800;
+        z-index: 2;
+    }
+
+    .description {
+        display: block; 
+        margin-top: 0.5rem; 
+        font-size: 0.8rem;
+        font-weight: 200;
+        color: #fff;
+    }
+
+    .text-light {
+        position: absolute;
+        bottom: 0;
+        right: 0 !important;
+        margin-right: 0%;
+        font-size: 0.9rem; 
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.5); 
+        
+        
+        z-index: 10; 
+        box-sizing: border-box;
+        width:100%; 
+        text-align: right; 
+    }
+}
+
+@media (max-width: 768px) {
+    
+    .title {
+        font-size: 1rem;
+        text-align: center;
+        word-spacing: 0.1em;
+    }
+
+    .link {
+        width: 5rem; 
+        height: 5rem;
+    }
+
+    .link__text {
+        font-size: 1.5rem;
+    }
+
+    
+    .li {
+        max-width: 100%; 
+        position: relative; 
+    }
+
+    .text-light {
+        bottom: 0.1rem;
+        right: 0.3rem; 
+        font-size: 0.85rem; 
+        padding: 0.2rem 0.4rem;
+    }
+
+    .h3 {
+        bottom: 2rem; 
+        left: 0;
+        right: 0;
+        padding: 0.4rem;
+    }
+
+    .description {
+        font-size: 0.75rem;
+        margin-top: 0.3rem;
+        width: fit-content;
+    }
+}
+
+
+
+

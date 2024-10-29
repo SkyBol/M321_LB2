@@ -1,11 +1,12 @@
 import { Paper, Grid, Typography, Link } from '@mui/material';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import ActiveUserContext from '../../../contexts/ActiveUserContext';
 import LoginForm from '../../molecules/LoginForm/LoginForm';
+import userManager from '../../../contexts/UserManager';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required(),
@@ -22,13 +23,17 @@ const Login = () => {
     const navigate = useNavigate();
     const { login } = useContext(ActiveUserContext);
 
+    useEffect(() => {
+      login();
+    }, []);
+
     const formik = useFormik({
       initialValues: {
         email: '',
         password: '',
       },
-      onSubmit: (values: { email: string; password: string }) => {
-        login(values.email.toLowerCase(), values.password)
+      onSubmit: () => {
+        login()
           .then(() => {
               navigate('/');
           })

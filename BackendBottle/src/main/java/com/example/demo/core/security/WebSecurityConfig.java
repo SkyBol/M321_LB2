@@ -11,6 +11,7 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
@@ -52,40 +53,11 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/v3/api-docs","/v3/api-docs/swagger-config","/swagger-ui/*","/myapi/*/*","/myapi/*").permitAll()
                 .requestMatchers("/call/**").authenticated()
                 .anyRequest().authenticated())
-            .oauth2Login((oauth2Login) -> oauth2Login
-                    .userInfoEndpoint((userInfo) -> userInfo
-                            .userAuthoritiesMapper(grantedAuthoritiesMapper())
-                    )
-            )
+            .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .build();
-  }
-
-  @Bean
-  public GrantedAuthoritiesMapper grantedAuthoritiesMapper() {
-    return (authorities) -> {
-      Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
-
-      authorities.forEach((authority) -> {
-        GrantedAuthority mappedAuthority;
-
-        if (authority instanceof OidcUserAuthority userAuthority) {
-            mappedAuthority = new OidcUserAuthority(
-                  "OIDC_USER", userAuthority.getIdToken(), userAuthority.getUserInfo());
-        } else if (authority instanceof OAuth2UserAuthority userAuthority) {
-            mappedAuthority = new OAuth2UserAuthority(
-                  "OAUTH2_USER", userAuthority.getAttributes());
-        } else {
-          mappedAuthority = authority;
-        }
-
-        mappedAuthorities.add(mappedAuthority);
-      });
-
-      return mappedAuthorities;
-    };
   }
 
   @Bean

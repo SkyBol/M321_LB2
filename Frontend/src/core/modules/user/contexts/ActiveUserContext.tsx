@@ -6,6 +6,7 @@ import AuthorityService from "../../authorities/services/AuthorityService";
 import UserService from "../services/UserService";
 import { Nullable } from "../../../types/Nullable";
 import { User } from "../models/User.model";
+import userManager from "./UserManager";
 
 /**
  * USER_DATA_LOCAL_STORAGE_KEY defines the localStorageKey in which the
@@ -19,7 +20,7 @@ export const TOKEN_LOCAL_STORAGE_KEY = "token";
  */
 export type ActiveUserContextType = {
   user: Nullable<User>;
-  login: (email: string, password: string) => Promise<boolean>;
+  login: () => Promise<boolean>;
   logout: () => void;
   setActiveUser: (user: User) => void;
   loadActiveUser: () => void;
@@ -131,17 +132,11 @@ export const ActiveUserContextProvider = ({
    * @param email
    * @param password
    */
-  const login = async (email: string, password: string) => {
-    await api.post("user/login", { email, password }).then((response: any) => {
-      console.log(response.headers.authorization);
-      localStorage.setItem(
-        TOKEN_LOCAL_STORAGE_KEY,
-        response.headers.authorization
-      );
-      setActiveUser(response.data);
-      return true;
-    });
-    return false;
+  const login = async () => {
+    console.log("HERE")
+    await userManager.signinRedirect();
+    console.log("Redirected apparently")
+    return true;
   };
 
   /**

@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios";
+import userManager, { getAccessToken } from "../modules/user/contexts/UserManager";
 
 /**
  * isDev returns a boolean if the application is running in development-mode.
@@ -22,10 +23,10 @@ const api: AxiosInstance = createAPI();
  * is stored inside the localStorage if a user is authenticated.
  */
 api.interceptors.request.use(
-  (request) => {
-    const token = localStorage.getItem("token");
+  async (request) => {
+    const token = await getAccessToken();
     if (token) {
-      request.headers.Authorization = token;
+      request.headers.Authorization = `Bearer ${token}`;
     }
     return request;
   },

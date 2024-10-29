@@ -24,7 +24,7 @@ const Router = () => {
                 <Route path={'*'} element={<UserTable />} />
             </Route> */}
 
-            {/* <Route path={'/login'} element={<Login/>} /> */}
+            <Route path={'/login'} element={<Login/>} />
 
 
             {/* Domain Routes */}

@@ -12,8 +12,16 @@ internal static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
+        builder.Services.AddCors(options => options.AddPolicy("AllowReactApp",
+            b =>
+            {
+                b.WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .Build();
+            }));
+        
         builder.Services.AddRazorPages();
-        builder.Services.AddCors(options => options.AddDefaultPolicy(cors => cors.AllowAnyOrigin().Build()));
 
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));

@@ -1,4 +1,5 @@
-﻿using Duende.IdentityServer;
+﻿using System.ComponentModel;
+using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 using IdentityModel;
 
@@ -25,7 +26,8 @@ public static class Config
     public static IEnumerable<ApiScope> ApiScopes =>
         new[]
         { 
-            new ApiScope(name: "api1", displayName: "My API")
+            new ApiScope(name: "cocktail", displayName: "Cocktail Backend"),
+            new ApiScope(name: "bottle",  displayName: "Bottle Backend")
         };
 
     public static IEnumerable<Client> Clients =>
@@ -33,43 +35,27 @@ public static class Config
         {
             new Client
             {
-                ClientId = "client",
-
-                // no interactive user, use the clientid/secret for authentication
+                /*
+                 * Non-interactive login from the "Bottle Backend" to the "Cocktail Backend"
+                 */
+                ClientId = "bottle_backend",
+                ClientSecrets = { new Secret("bottles_are_super_124".Sha256()) },
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
-
-                // secret for authentication
-                ClientSecrets =
-                {
-                    new Secret("secret".Sha256())
-                },
-
-                // scopes that client has access to
-                AllowedScopes = { "api1" }
+                AllowedScopes = { "cocktail" },
+                
             },
-            // interactive ASP.NET Core Web App
             new Client
             {
+                /*
+                 * Interactive login from the frontend to the "Bottle Backend"
+                 */
                 ClientId = "web",
-                ClientSecrets = { new Secret("secret".Sha256()) },
-
+                ClientSecrets = { new Secret("cocktails_are_super_124".Sha256()) },
                 AllowedGrantTypes = GrantTypes.Code,
-                
-                // where to redirect to after login
                 RedirectUris = { "https://localhost:8081/*" },
-
-                // where to redirect to after logout
                 PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
-
                 AllowOfflineAccess = true,
-
-                AllowedScopes =
-                {
-                    IdentityServerConstants.StandardScopes.OpenId,
-                    IdentityServerConstants.StandardScopes.Profile,
-                    "verification",
-                    "api1"
-                }
+                AllowedScopes = { "bottle" }
             }
         };
 }

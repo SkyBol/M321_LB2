@@ -50,7 +50,6 @@ public static class Config
                  * Interactive login from the frontend to the "Bottle Backend"
                  */
                 ClientId = "web",
-                ClientSecrets = { new Secret("cocktails_are_super_124".Sha256()) },
                 AllowedGrantTypes = GrantTypes.Code,
                 RedirectUris = { "https://localhost:8081/*" },
                 PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },

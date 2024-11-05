@@ -6,9 +6,10 @@ interface DesktopNavbarProps {
     items: NavbarItem[];
     handleClick: (tab: string) => void;
     activeTab: string;
+    isLoggedIn: boolean;
 }
 
-const DesktopNavbar: React.FC<DesktopNavbarProps> = ({items, handleClick, activeTab}) => {
+const DesktopNavbar: React.FC<DesktopNavbarProps> = ({items, handleClick, activeTab, isLoggedIn}) => {
     return (
         <nav className={styles.menu}>
             <img src={logo} style={{width:"3vw", minWidth:"40px"}} alt="Logo"/>
@@ -25,6 +26,15 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = ({items, handleClick, active
                     </span>
                 ))
             }
+            <span
+                className={`${styles.navItem}`}
+                onClick={() => handleClick("sign")}
+            >
+                <span className={styles.icon}>
+                    <i data-feather={"bell"}></i>
+                </span>
+                <div className={styles.tab}>{isLoggedIn ? 'Logout' : 'Login'}</div>
+            </span>
         </nav>
     );
 };

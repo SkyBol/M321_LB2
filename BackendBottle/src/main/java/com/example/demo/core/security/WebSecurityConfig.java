@@ -1,6 +1,7 @@
 package com.example.demo.core.security;
 
 import com.example.demo.core.security.helpers.JwtProperties;
+import com.example.demo.domain.role.CustomGrantedAuthoritiesConverter;
 import com.example.demo.domain.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,7 @@ import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMap
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -37,27 +39,30 @@ public class WebSecurityConfig {
 
   private final UserService userService;
   private final PasswordEncoder passwordEncoder;
-  private final JwtProperties jwtProperties;
 
   @Autowired
-  public WebSecurityConfig(UserService userService, PasswordEncoder passwordEncoder, JwtProperties jwtProperties) {
+  public WebSecurityConfig(UserService userService, PasswordEncoder passwordEncoder) {
     this.userService = userService;
     this.passwordEncoder = passwordEncoder;
-    this.jwtProperties = jwtProperties;
   }
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http.authorizeHttpRequests(requests -> requests
-                .requestMatchers(HttpMethod.POST, "/user/login", "/user/register").permitAll()
-                .requestMatchers(HttpMethod.GET, "/v3/api-docs","/v3/api-docs/swagger-config","/swagger-ui/*","/myapi/*/*","/myapi/*").permitAll()
-                .requestMatchers("/call/**").authenticated()
+                .requestMatchers("/**").permitAll()
                 .anyRequest().authenticated())
             .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .build();
+  }
+
+  @Bean
+  public JwtAuthenticationConverter jwtAuthenticationConverter() {
+    JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
+    converter.setJwtGrantedAuthoritiesConverter(new CustomGrantedAuthoritiesConverter());
+    return converter;
   }
 
   @Bean

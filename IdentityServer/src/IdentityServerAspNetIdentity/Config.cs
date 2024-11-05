@@ -35,26 +35,15 @@ public static class Config
         {
             new Client
             {
-                /*
-                 * Non-interactive login from the "Bottle Backend" to the "Cocktail Backend"
-                 */
-                ClientId = "bottle_backend",
-                ClientSecrets = { new Secret("bottles_are_super_124".Sha256()) },
-                AllowedGrantTypes = GrantTypes.ClientCredentials,
-                AllowedScopes = { "cocktail" },
-                
-            },
-            new Client
-            {
-                /*
-                 * Interactive login from the frontend to the "Bottle Backend"
-                 */
                 ClientId = "web",
                 AllowedGrantTypes = GrantTypes.Code,
-                RedirectUris = { "https://localhost:8081/*" },
-                PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
-                AllowOfflineAccess = true,
-                AllowedScopes = { "bottle" }
+                RequirePkce = true,
+                RedirectUris = { "http://localhost:5173/login/successfull" },
+                PostLogoutRedirectUris = { "http://localhost:5173/logout/successfull" },
+                AllowedScopes = { "openid", "profile", "cocktail", "bottle" },
+                RequireClientSecret = false,
+                AllowAccessTokensViaBrowser = true,
+                AllowedCorsOrigins = { "http://localhost:5173" }
             }
         };
 }

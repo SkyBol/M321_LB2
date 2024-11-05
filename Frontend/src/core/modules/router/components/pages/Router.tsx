@@ -1,7 +1,5 @@
 import {Route, Routes} from 'react-router-dom';
 import Login from '../../../user/components/pages/LoginPage/LoginPage';
-import UserPage from '../../../user/components/pages/UserPage/UserPage';
-import UserTable from '../../../user/components/pages/UserTable/UserTable';
 import Homepage from '../../../homepage/components/pages/Homepage/Homepage';
 import BottlePage from "../../../../../domain/modules/bootle/components/pages/BottlePage/BottlePage.tsx";
 import AbstractFormGenerated from '../../../abstract/components/form/components/molecules/AbstractFormGenerated';
@@ -13,18 +11,18 @@ import GuestBook from '../../../../../domain/modules/guestbook/components/pages/
 import CocktailTable from '../../../../../domain/modules/cocktail/components/pages/CocktailTable/CocktailTable.tsx';
 import CocktailPage from '../../../../../domain/modules/cocktail/components/pages/CocktailPage/CocktailPage.tsx';
 import CocktailDetailPage from '../../../../../domain/modules/cocktail/components/pages/CocktailPage/CocktailDetailPage.tsx';
+import SuccessfullLogin from '../../../user/components/pages/SuccessfullLogin/SuccessfullLogin.tsx';
+import SuccessfullLogout from '../../../user/components/pages/SuccessfullLogout/SuccessfullLogout.tsx';
+import Logout from '../../../user/components/pages/LogoutPage/LogoutPage.tsx';
 
 const Router = () => {
     return (
         <Routes>
             {/* Core Routes */}
-            {/* <Route path={'/users'}>
-                <Route path={'/users/add'} element={<UserPage />} />
-                <Route path={'/users/:userId'} element={<UserPage />} />
-                <Route path={'*'} element={<UserTable />} />
-            </Route> */}
-
+            <Route path={'/logout/successfull'} element={<SuccessfullLogout/>} />
+            <Route path={'/login/successfull'} element={<SuccessfullLogin/>} />
             <Route path={'/login'} element={<Login/>} />
+            <Route path={'/logout'} element={<Logout/>} />
 
 
             {/* Domain Routes */}

@@ -1,5 +1,8 @@
 ﻿using IdentityServerAspNetIdentity;
 using Serilog;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -19,6 +22,11 @@ try
     var app = builder
         .ConfigureServices()
         .ConfigurePipeline();
+
+    app.UseIdentityServer();
+    SeedData.EnsureSeedData(app);
+    
+    app.UseCors("AllowSpecificOrigin");
 
     // this seeding is only for the template to bootstrap the DB and users.
     // in production you will likely want a different approach.

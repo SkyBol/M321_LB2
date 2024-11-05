@@ -114,15 +114,8 @@ export const ActiveUserContextProvider = ({
    * and redirecting to the LoginPage.
    */
   const logout = () => {
-    // If no token is saved inside the local storage clear the localStorage directly
-    if (localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY) === null) {
-      resetAuthorization();
-      return;
-    }
-    // If a token is present send a logout-request and clear the localStorage afterwards
-    api.get("/logout").finally(resetAuthorization);
-    //navigate to login page
-    navigate("/login");
+    userManager.signoutRedirect();
+    return true;
   };
 
   /**
@@ -133,9 +126,7 @@ export const ActiveUserContextProvider = ({
    * @param password
    */
   const login = async () => {
-    console.log("HERE")
     await userManager.signinRedirect();
-    console.log("Redirected apparently")
     return true;
   };
 

@@ -42,13 +42,13 @@ const NavbarItems: NavbarItem[] = [
         path: "/bottles/add",
         icon: "star",
     },
-    {
-        name: "logout",
-        display: "Logout",
-        path: "/login",
-        icon: "bell",
-    },
 ]
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
 
 export default function SearchAppBar() {
     const navigate = useNavigate();
@@ -56,8 +56,20 @@ export default function SearchAppBar() {
 
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Detect if the screen is mobile
+    const isLoggedIn = !!getCookie(".AspNetCore.Identity.Application");
+
+    console.log(isLoggedIn, getCookie(".AspNetCore.Identity.Application"));
+
 
     useEffect(() => {
+        if (activeTab === "sign") {
+            if (isLoggedIn) {
+                navigate("/logout");
+            } else {
+                navigate("/login");
+            }
+        }
+
         const newPath = NavbarItems.find((item) => item.name === activeTab)?.path;
         if (newPath) {
             navigate(newPath);
@@ -93,6 +105,7 @@ export default function SearchAppBar() {
                         items={NavbarItems}
                         handleClick={setActiveTab}
                         activeTab={activeTab}
+                        isLoggedIn={isLoggedIn}
                     />
                 }
             </AppBar>
